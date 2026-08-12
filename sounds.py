@@ -74,7 +74,7 @@ for word in words:
                 previous_letter = word[1:2]
                 word = word[2:]
             else:
-                if ((previous_letter in consonants and word[1:2] in consonants) or (word[1:2] in consonants and word[1:2] == word[2:3]) or (word[1:3] == "ck") or (word[1:4] == "tch")):
+                if (((previous_letter in consonants and word[1:2] in consonants) or (word[1:2] in consonants and word[1:2] == word[2:3]) or (word[1:3] == "ck") or (word[1:4] == "tch")) and word[-1] != "e") or (word[-1] == "e" and len(word) == 1):
                     sound.append(f"/{word[0]}/")
                     previous_letter = word[0]
                     word = word[1:]
@@ -106,13 +106,22 @@ for word in words:
                 previous_letter = "h"
                 word = word[2:]
             elif word[0] == "s":
-                if sound and sound[-1] in ["/p/", "/t/", "/k/", "/f/", "/th/"]:
+                if not sound or (sound and sound[-1] in ["/p/", "/t/", "/k/", "/f/", "/th/"]):
                     sound.append("/s/")
                     previous_letter = "s"
                     word = word[1:]
                 else:
                     sound.append("/sz/")
                     previous_letter = "s"
+                    word = word[1:]
+            elif word[0] == "c":
+                if word[1:2] in "eiy":
+                    sound.append("/s/")
+                    previous_letter = "c"
+                    word = word[1:]
+                else:
+                    sound.append("/k/")
+                    previous_letter = "c"
                     word = word[1:]
             elif word[0] in "pbtdkgjfvszhmnlrw":
                 sound.append(f"/{word[0]}/")
