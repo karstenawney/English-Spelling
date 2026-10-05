@@ -68,13 +68,13 @@ for line in lines:
     if clean_line == "lower":
         functions += "text = text.lower()\n"
         
-    elif clean_line.startswith("replace(") and clean_line.endswith(")"):
+    else:
         # Extract content between replace( and )
-        args = clean_line[8:-1]
+        args = clean_line
         
         # Split on the first comma found
-        if "," in args:
-            old_str, new_str = args.split(",", 1)
+        if " " in args:
+            old_str, new_str = args.split(" ", 1)
             old_str = old_str.strip()
             new_str = new_str.strip()
             
