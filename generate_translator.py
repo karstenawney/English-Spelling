@@ -100,4 +100,3 @@ with open(out_path, "w", encoding="utf-8") as file:
     file.write(functions)
 
 print(f"\nSuccess! Translator program generated at: {out_path}")
-```
